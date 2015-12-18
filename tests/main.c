@@ -1,0 +1,68 @@
+#include <stdarg.h>
+#include <stddef.h>
+#include <setjmp.h>
+#include <cmocka.h>
+
+#include "julian_day.h"
+
+static void get_calendar_type_test(void **state) {
+  calendar_type result;
+
+  result = get_calendar_type(1581, 10, 4.0);
+  assert_int_equal(result, JULIAN_CALENDAR);
+
+  result = get_calendar_type(1582, 9, 4.0);
+  assert_int_equal(result, JULIAN_CALENDAR);
+
+  result = get_calendar_type(1582, 10, 3.0);
+  assert_int_equal(result, JULIAN_CALENDAR);
+
+  result = get_calendar_type(1582, 10, 4.0);
+  assert_int_equal(result, JULIAN_CALENDAR);
+
+  result = get_calendar_type(1582, 10, 15.0);
+  assert_int_equal(result, GREGORIAN_CALENDAR);
+
+  (void) state;
+}
+
+static void julian_day_test(void **state) {
+  double jd;
+
+  double dates[15][4] = {
+    // Example 7.a
+    { 1957, 10,  4.81, 2436116.31},
+    // Example 7.b
+    {  333,  1, 27.5,  1842713.0},
+    // Data from table in Chapter 7
+    { 2000,  1,  1.5,  2451545.0},
+    { 1987,  1, 27.0,  2446822.5},
+    { 1987,  6, 19.5,  2446966.0},
+    { 1988,  1, 27.0,  2447187.5},
+    { 1988,  6, 19.5,  2447332.0},
+    { 1900,  1,  1.0,  2415020.5},
+    { 1600,  1,  1.0,  2305447.5},
+    { 1600, 12, 31.0,  2305812.5},
+    {  837,  4, 10.3,  2026871.8},
+    {-1000,  7, 12.5,  1356001.0},
+    {-1000,  2, 29.0,  1355866.5},
+    {-1001,  8, 17.9,  1355671.4},
+    {-4712,  1,  1.5,        0.0}
+  };
+
+  for (int i = 0; i < 15; i++) {
+    jd = julian_day(dates[i][0], dates[i][1], dates[i][2]);
+    assert_in_range(jd, dates[i][3], dates[i][3]);
+  }
+
+  (void) state;
+}
+
+int main(void) {
+  const struct CMUnitTest tests[] = {
+    cmocka_unit_test(get_calendar_type_test),
+    cmocka_unit_test(julian_day_test)
+  };
+
+  return cmocka_run_group_tests(tests, NULL, NULL);
+}
