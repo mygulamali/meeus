@@ -25,3 +25,21 @@ double julian_day(int year, int month, double day) {
 
   return jd;
 }
+
+year_type get_julian_year_type(int year) {
+  if (year % 4 == 0)
+    return BISSEXTILE_YEAR;
+  return COMMON_YEAR;
+}
+
+year_type get_gregorian_year_type(int year) {
+  if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
+    return BISSEXTILE_YEAR;
+  return COMMON_YEAR;
+}
+
+year_type get_year_type(int year) {
+  if (year < 1582)
+    return get_julian_year_type(year);
+  return get_gregorian_year_type(year);
+}

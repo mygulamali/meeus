@@ -58,10 +58,36 @@ static void julian_day_test(void **state) {
   (void) state;
 }
 
+static void get_year_type_test(void **state) {
+  // Data from examples on page 62
+  int years[11][2] = {
+    { 750, COMMON_YEAR},
+    { 900, BISSEXTILE_YEAR},
+    {1236, BISSEXTILE_YEAR},
+    {1429, COMMON_YEAR},
+    {1600, BISSEXTILE_YEAR},
+    {1700, COMMON_YEAR},
+    {1800, COMMON_YEAR},
+    {1900, COMMON_YEAR},
+    {2000, BISSEXTILE_YEAR},
+    {2100, COMMON_YEAR},
+    {2400, BISSEXTILE_YEAR}
+  };
+
+  year_type year;
+  for (int i = 0; i < 11; i++) {
+    year = get_year_type(years[i][0]);
+    assert_int_equal(year, years[i][1]);
+  }
+
+  (void) state;
+}
+
 int main(void) {
   const struct CMUnitTest tests[] = {
     cmocka_unit_test(get_calendar_type_test),
-    cmocka_unit_test(julian_day_test)
+    cmocka_unit_test(julian_day_test),
+    cmocka_unit_test(get_year_type_test)
   };
 
   return cmocka_run_group_tests(tests, NULL, NULL);

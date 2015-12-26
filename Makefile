@@ -34,7 +34,7 @@ libmeeus.a: ${OBJECTS}
 	mkdir -p ${LIB_DIR}
 	${AR} -cq ${LD_FLAGS} ${LIB_DIR}/$@ $^
 
-tests: libmeeus.a
+tests: clean libmeeus.a
 	mkdir -p ${BUILD_DIR}
 	${CC} ${TEST_SOURCES} ${TEST_CFLAGS} ${TEST_LDFLAGS} -o ${BUILD_DIR}/$@
 	${BUILD_DIR}/$@
