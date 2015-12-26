@@ -6,29 +6,24 @@
 #include "julian_day.h"
 
 static void get_calendar_type_test(void **state) {
-  calendar_type result;
+  int dates[5][4] = {
+    {1581, 10,  4, JULIAN_CALENDAR},
+    {1582,  9,  4, JULIAN_CALENDAR},
+    {1582, 10,  3, JULIAN_CALENDAR},
+    {1582, 10,  4, JULIAN_CALENDAR},
+    {1582, 10, 15, GREGORIAN_CALENDAR}
+  };
 
-  result = get_calendar_type(1581, 10, 4.0);
-  assert_int_equal(result, JULIAN_CALENDAR);
-
-  result = get_calendar_type(1582, 9, 4.0);
-  assert_int_equal(result, JULIAN_CALENDAR);
-
-  result = get_calendar_type(1582, 10, 3.0);
-  assert_int_equal(result, JULIAN_CALENDAR);
-
-  result = get_calendar_type(1582, 10, 4.0);
-  assert_int_equal(result, JULIAN_CALENDAR);
-
-  result = get_calendar_type(1582, 10, 15.0);
-  assert_int_equal(result, GREGORIAN_CALENDAR);
+  calendar_type calendar;
+  for (int i = 0; i < 5; i++) {
+    calendar = get_calendar_type(dates[i][0], dates[i][1], dates[i][2]);
+    assert_int_equal(calendar, dates[i][3]);
+  }
 
   (void) state;
 }
 
 static void julian_day_test(void **state) {
-  double jd;
-
   double dates[15][4] = {
     // Example 7.a
     { 1957, 10,  4.81, 2436116.31},
@@ -50,6 +45,7 @@ static void julian_day_test(void **state) {
     {-4712,  1,  1.5,        0.0}
   };
 
+  double jd;
   for (int i = 0; i < 15; i++) {
     jd = julian_day(dates[i][0], dates[i][1], dates[i][2]);
     assert_in_range(jd, dates[i][3], dates[i][3]);
