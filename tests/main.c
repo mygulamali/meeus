@@ -79,11 +79,20 @@ static void get_year_type_test(void **state) {
   (void) state;
 }
 
+static void modified_julian_day_test(void **state) {
+  // Example on page 63
+  double mjd = modified_julian_day(1858, 11, 17);
+  assert_in_range(mjd, 0.0, 0.0);
+
+  (void) state;
+}
+
 int main(void) {
   const struct CMUnitTest tests[] = {
     cmocka_unit_test(get_calendar_type_test),
     cmocka_unit_test(julian_day_test),
-    cmocka_unit_test(get_year_type_test)
+    cmocka_unit_test(get_year_type_test),
+    cmocka_unit_test(modified_julian_day_test)
   };
 
   return cmocka_run_group_tests(tests, NULL, NULL);

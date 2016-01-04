@@ -43,3 +43,7 @@ year_type get_year_type(int year) {
     return get_julian_year_type(year);
   return get_gregorian_year_type(year);
 }
+
+double modified_julian_day(int year, int month, double day) {
+  return julian_day(year, month, day) - 2400000.5;
+}

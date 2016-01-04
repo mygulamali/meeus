@@ -11,5 +11,6 @@ double julian_day(int year, int month, double day);
 year_type get_julian_year_type(int year);
 year_type get_gregorian_year_type(int year);
 year_type get_year_type(int year);
+double modified_julian_day(int year, int month, double day);
 
 #endif
