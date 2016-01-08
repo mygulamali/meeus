@@ -1,6 +1,6 @@
 #include "julian_day.h"
 
-calendar_type get_calendar_type(int year, int month, double day) {
+calendar_t get_calendar_type(intmax_t year, intmax_t month, double day) {
   if ((year < 1582) ||
       ((year == 1582) && (month < 10)) ||
       ((year == 1582) && (month == 10) && (day <= 4.0)))
@@ -9,8 +9,8 @@ calendar_type get_calendar_type(int year, int month, double day) {
   return GREGORIAN_CALENDAR;
 }
 
-double julian_day(int year, int month, double day) {
-  calendar_type calendar = get_calendar_type(year, month, day);
+double julian_day(intmax_t year, intmax_t month, double day) {
+  calendar_t calendar = get_calendar_type(year, month, day);
 
   if (month <= 2) {
     year--;
@@ -26,24 +26,24 @@ double julian_day(int year, int month, double day) {
   return jd;
 }
 
-year_type get_julian_year_type(int year) {
+year_t get_julian_year_type(intmax_t year) {
   if (year % 4 == 0)
     return BISSEXTILE_YEAR;
   return COMMON_YEAR;
 }
 
-year_type get_gregorian_year_type(int year) {
+year_t get_gregorian_year_type(intmax_t year) {
   if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
     return BISSEXTILE_YEAR;
   return COMMON_YEAR;
 }
 
-year_type get_year_type(int year) {
+year_t get_year_type(intmax_t year) {
   if (year < 1582)
     return get_julian_year_type(year);
   return get_gregorian_year_type(year);
 }
 
-double modified_julian_day(int year, int month, double day) {
+double modified_julian_day(intmax_t year, intmax_t month, double day) {
   return julian_day(year, month, day) - 2400000.5;
 }

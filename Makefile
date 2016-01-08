@@ -5,7 +5,7 @@ INCLUDE_DIR = ${PWD}/include
 BUILD_DIR = ${PWD}/build
 LIB_DIR = ${PWD}/lib
 
-CFLAGS += -O2 -g -Wall -Wextra
+CFLAGS += -O2 -g -Wall -Wextra -Wpedantic -std=c11 -march=native
 LDFLAGS += -lm
 
 SOURCES = ${SRC_DIR}/julian_day.c
@@ -13,7 +13,7 @@ SOURCES = ${SRC_DIR}/julian_day.c
 CMOCKA_DIR = /usr/local/Cellar/cmocka/1.0.1
 TEST_DIR = ${PWD}/tests
 
-TEST_CFLAGS = -I${INCLUDE_DIR}
+TEST_CFLAGS = -I${INCLUDE_DIR} -Werror -Wshadow
 TEST_LDFLAGS = -L${LIB_DIR} -lmeeus -L${CMOCKA_DIR}/lib -lcmocka
 
 TEST_SOURCES = ${TEST_DIR}/main.c

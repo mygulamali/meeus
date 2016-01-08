@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
@@ -6,7 +7,7 @@
 #include "julian_day.h"
 
 static void get_calendar_type_test(void **state) {
-  int dates[5][4] = {
+  intmax_t dates[5][4] = {
     {1581, 10,  4, JULIAN_CALENDAR},
     {1582,  9,  4, JULIAN_CALENDAR},
     {1582, 10,  3, JULIAN_CALENDAR},
@@ -14,9 +15,8 @@ static void get_calendar_type_test(void **state) {
     {1582, 10, 15, GREGORIAN_CALENDAR}
   };
 
-  calendar_type calendar;
-  for (int i = 0; i < 5; i++) {
-    calendar = get_calendar_type(dates[i][0], dates[i][1], dates[i][2]);
+  for (intmax_t i = 0; i < 5; i++) {
+    calendar_t calendar = get_calendar_type(dates[i][0], dates[i][1], dates[i][2]);
     assert_int_equal(calendar, dates[i][3]);
   }
 
@@ -45,9 +45,8 @@ static void julian_day_test(void **state) {
     {-4712,  1,  1.5,        0.0}
   };
 
-  double jd;
-  for (int i = 0; i < 15; i++) {
-    jd = julian_day(dates[i][0], dates[i][1], dates[i][2]);
+  for (intmax_t i = 0; i < 15; i++) {
+    double jd = julian_day(dates[i][0], dates[i][1], dates[i][2]);
     assert_in_range(jd, dates[i][3], dates[i][3]);
   }
 
@@ -56,7 +55,7 @@ static void julian_day_test(void **state) {
 
 static void get_year_type_test(void **state) {
   // Data from examples on page 62
-  int years[11][2] = {
+  intmax_t years[11][2] = {
     { 750, COMMON_YEAR},
     { 900, BISSEXTILE_YEAR},
     {1236, BISSEXTILE_YEAR},
@@ -70,9 +69,8 @@ static void get_year_type_test(void **state) {
     {2400, BISSEXTILE_YEAR}
   };
 
-  year_type year;
-  for (int i = 0; i < 11; i++) {
-    year = get_year_type(years[i][0]);
+  for (intmax_t i = 0; i < 11; i++) {
+    year_t year = get_year_type(years[i][0]);
     assert_int_equal(year, years[i][1]);
   }
 
