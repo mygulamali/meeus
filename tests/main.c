@@ -16,7 +16,13 @@ static void get_calendar_type_test(void **state) {
   };
 
   for (intmax_t i = 0; i < 5; i++) {
-    calendar_t calendar = get_calendar_type(dates[i][0], dates[i][1], dates[i][2]);
+    date_t date = {
+      .year = dates[i][0],
+      .mon = dates[i][1],
+      .mday = dates[i][2]
+    };
+
+    calendar_t calendar = get_calendar_type(date);
     assert_int_equal(calendar, dates[i][3]);
   }
 
@@ -46,7 +52,13 @@ static void julian_day_test(void **state) {
   };
 
   for (intmax_t i = 0; i < 15; i++) {
-    double jd = julian_day(dates[i][0], dates[i][1], dates[i][2]);
+    date_t date = {
+      .year = dates[i][0],
+      .mon = dates[i][1],
+      .mday = dates[i][2]
+    };
+
+    double jd = julian_day(date);
     assert_in_range(jd, dates[i][3], dates[i][3]);
   }
 
@@ -79,7 +91,13 @@ static void get_year_type_test(void **state) {
 
 static void modified_julian_day_test(void **state) {
   // Example on page 63
-  double mjd = modified_julian_day(1858, 11, 17);
+  date_t date = {
+    .year = 1858,
+    .mon = 11,
+    .mday = 17
+  };
+
+  double mjd = modified_julian_day(date);
   assert_in_range(mjd, 0.0, 0.0);
 
   (void) state;
