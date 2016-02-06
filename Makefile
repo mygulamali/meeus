@@ -16,7 +16,8 @@ TEST_DIR = ${PWD}/tests
 TEST_CFLAGS = -I${INCLUDE_DIR} -Werror -Wshadow
 TEST_LDFLAGS = -L${LIB_DIR} -lmeeus -L${CMOCKA_DIR}/lib -lcmocka
 
-TEST_SOURCES = ${TEST_DIR}/julian_day_tests.c \
+TEST_SOURCES = ${TEST_DIR}/test_helpers.c \
+               ${TEST_DIR}/julian_day_tests.c \
                ${TEST_DIR}/main.c
 
 .SUFFIXES:
