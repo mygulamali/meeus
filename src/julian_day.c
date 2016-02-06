@@ -26,6 +26,25 @@ double julian_day(date_t date) {
   return jd;
 }
 
+double julian_day_zero(intmax_t year) {
+  date_t date = {
+    .year = year - 1,
+    .mon = 12,
+    .mday = 31.0
+  };
+  calendar_t calendar = get_calendar_type(date);
+
+  if (calendar == JULIAN_CALENDAR)
+    return julian_day(date);
+
+  year--;
+  if ((1901 <= year) && (year <= 2099))
+    return (floor(365.25 * year) + 1721409.5);
+
+  double a = floor(year / 100.0);
+  return floor(365.25 * year) - a + floor(a / 4.0) + 1721424.5;
+}
+
 year_t get_julian_year_type(intmax_t year) {
   if (year % 4 == 0)
     return BISSEXTILE_YEAR;

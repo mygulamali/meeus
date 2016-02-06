@@ -13,6 +13,7 @@ typedef struct date_type {
 
 calendar_t get_calendar_type(date_t date);
 double julian_day(date_t date);
+double julian_day_zero(intmax_t year);
 year_t get_julian_year_type(intmax_t year);
 year_t get_gregorian_year_type(intmax_t year);
 year_t get_year_type(intmax_t year);

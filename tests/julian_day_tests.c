@@ -59,6 +59,23 @@ void julian_day_test(void **state) {
   (void) state;
 }
 
+void julian_day_zero_test(void **state) {
+  double years[4][2] = {
+    // Selected data adapted from table in Chapter 7
+    { 2000, 2451543.5},
+    { 1900, 2415019.5},
+    { 1600, 2305446.5},
+    {-4712,      -1.5}
+  };
+
+  for (intmax_t i = 0; i < 4; i++) {
+    double jd0 = julian_day_zero(years[i][0]);
+    assert_in_range(jd0, years[i][1], years[i][1]);
+  }
+
+  (void) state;
+}
+
 void get_year_type_test(void **state) {
   // Data from examples on page 62
   intmax_t years[11][2] = {

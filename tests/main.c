@@ -10,6 +10,7 @@ int main(void) {
   const struct CMUnitTest tests[] = {
     cmocka_unit_test(get_calendar_type_test),
     cmocka_unit_test(julian_day_test),
+    cmocka_unit_test(julian_day_zero_test),
     cmocka_unit_test(get_year_type_test),
     cmocka_unit_test(modified_julian_day_test)
   };
