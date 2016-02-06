@@ -53,7 +53,7 @@ void julian_day_test(void **state) {
     };
 
     double jd = julian_day(date);
-    assert_in_range(jd, dates[i][3], dates[i][3]);
+    assert_double_equal(jd, dates[i][3], JULIAN_DAY_TOLERANCE);
   }
 
   (void) state;
@@ -70,7 +70,7 @@ void julian_day_zero_test(void **state) {
 
   for (intmax_t i = 0; i < 4; i++) {
     double jd0 = julian_day_zero(years[i][0]);
-    assert_in_range(jd0, years[i][1], years[i][1]);
+    assert_double_equal(jd0, years[i][1], JULIAN_DAY_TOLERANCE);
   }
 
   (void) state;
@@ -109,7 +109,7 @@ void modified_julian_day_test(void **state) {
   };
 
   double mjd = modified_julian_day(date);
-  assert_in_range(mjd, 0.0, 0.0);
+  assert_double_equal(mjd, 0.0, JULIAN_DAY_TOLERANCE);
 
   (void) state;
 }
