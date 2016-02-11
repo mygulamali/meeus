@@ -7,13 +7,13 @@
 #include "julian_day_tests.h"
 
 int main(void) {
-  const struct CMUnitTest tests[] = {
-    cmocka_unit_test(get_calendar_type_test),
-    cmocka_unit_test(julian_day_test),
-    cmocka_unit_test(julian_day_zero_test),
-    cmocka_unit_test(get_year_type_test),
-    cmocka_unit_test(modified_julian_day_test)
-  };
+    const struct CMUnitTest tests[] = {
+        cmocka_unit_test(get_calendar_type_test),
+        cmocka_unit_test(julian_day_test),
+        cmocka_unit_test(julian_day_zero_test),
+        cmocka_unit_test(get_year_type_test),
+        cmocka_unit_test(modified_julian_day_test)
+    };
 
-  return cmocka_run_group_tests(tests, NULL, NULL);
+    return cmocka_run_group_tests(tests, NULL, NULL);
 }

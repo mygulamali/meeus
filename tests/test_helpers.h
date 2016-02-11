@@ -47,12 +47,8 @@ void assert_double_not_equal(double a, double b, double eps);
     _assert_double_not_equal(a, b, eps, __FILE__, __LINE__)
 #endif
 
-void _assert_double_equal(
-    const double a, const double b, const double eps,
-    const char* const file, const int line
-);
+void _assert_double_equal(const double a, const double b, const double eps,
+                          const char* const file, const int line);
 
-void _assert_double_not_equal(
-    const double a, const double b, const double eps,
-    const char* const file, const int line
-);
+void _assert_double_not_equal(const double a, const double b, const double eps,
+                              const char* const file, const int line);
