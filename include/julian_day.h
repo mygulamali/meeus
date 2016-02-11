@@ -6,9 +6,9 @@
 typedef enum calendar_types {JULIAN_CALENDAR, GREGORIAN_CALENDAR} calendar_t;
 typedef enum year_types {COMMON_YEAR, BISSEXTILE_YEAR} year_t;
 typedef struct date_type {
-  intmax_t year,
-           mon;
-  double   mday;
+    intmax_t year,
+             mon;
+    double   mday;
 } date_t;
 
 calendar_t get_calendar_type(date_t date);
