@@ -20,3 +20,5 @@ year_t get_year_type(intmax_t year);
 double modified_julian_day(date_t date);
 date_t calendar_date(double julian_day);
 double calendar_diff(date_t date_1, date_t date_2);
+date_t date_before(date_t date, double days);
+date_t date_after(date_t date, double days);

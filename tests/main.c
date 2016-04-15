@@ -14,7 +14,9 @@ int main(void) {
         cmocka_unit_test(get_year_type_test),
         cmocka_unit_test(modified_julian_day_test),
         cmocka_unit_test(calendar_date_test),
-        cmocka_unit_test(calendar_diff_test)
+        cmocka_unit_test(calendar_diff_test),
+        cmocka_unit_test(date_before_test),
+        cmocka_unit_test(date_after_test)
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);

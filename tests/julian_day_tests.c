@@ -159,3 +159,29 @@ void calendar_diff_test(void **state) {
 
   (void) state;
 }
+
+void date_before_test(void **state) {
+  // Exercise at the end of page 64
+  date_t input_date = {.year = 2018, .mon = 11, .mday = 26};
+
+  date_t date = date_before(input_date, 10000);
+
+  assert_int_equal(date.year, 1991);
+  assert_int_equal(date.mon, 7);
+  assert_double_equal(date.mday, 11.0, JULIAN_DAY_TOLERANCE);
+
+  (void) state;
+}
+
+void date_after_test(void **state) {
+  // Exercise at the end of page 64
+  date_t input_date = {.year = 1991, .mon = 7, .mday = 11};
+
+  date_t date = date_after(input_date, 10000);
+
+  assert_int_equal(date.year, 2018);
+  assert_int_equal(date.mon, 11);
+  assert_double_equal(date.mday, 26.0, JULIAN_DAY_TOLERANCE);
+
+  (void) state;
+}

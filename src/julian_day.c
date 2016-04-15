@@ -108,3 +108,11 @@ date_t calendar_date(double julian_day) {
 double calendar_diff(date_t date_1, date_t date_2) {
   return julian_day(date_1) - julian_day(date_2);
 }
+
+date_t date_before(date_t date, double days) {
+  return calendar_date(julian_day(date) - days);
+}
+
+date_t date_after(date_t date, double days) {
+  return calendar_date(julian_day(date) + days);
+}
