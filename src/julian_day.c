@@ -66,3 +66,41 @@ year_t get_year_type(intmax_t year) {
 double modified_julian_day(date_t date) {
     return julian_day(date) - 2400000.5;
 }
+
+date_t calendar_date(double julian_day) {
+    julian_day += 0.5;
+    double z = floor(julian_day);
+    double f = julian_day - z;
+
+    double a;
+    if (z < 2299161)
+        a = z;
+    else {
+        double alpha = floor((z - 1867216.25) / 36524.25);
+        a = z + 1.0 + alpha - floor(0.25*alpha);
+    }
+
+    double b = a + 1524.0;
+    double c = floor((b - 122.1) / 365.25);
+    double d = floor(365.25 * c);
+    double e = floor((b - d) / 30.6001);
+
+    date_t date;
+    date.mday = b - d - floor(30.6001 * e) + f;
+
+    if (e < 14.0)
+        date.mon = (intmax_t) e - 1;
+    else if ((e == 14) || (e == 15))
+        date.mon = (intmax_t) e - 13;
+    else
+        date.mon = NAN;
+
+    if (date.mon > 2)
+        date.year = (intmax_t) c - 4716;
+    else if ((date.mon == 1) || (date.mon == 2))
+        date.year = (intmax_t) c - 4715;
+    else
+        date.year = NAN;
+
+    return date;
+}

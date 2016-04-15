@@ -18,3 +18,4 @@ year_t get_julian_year_type(intmax_t year);
 year_t get_gregorian_year_type(intmax_t year);
 year_t get_year_type(intmax_t year);
 double modified_julian_day(date_t date);
+date_t calendar_date(double julian_day);

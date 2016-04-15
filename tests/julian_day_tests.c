@@ -113,3 +113,37 @@ void modified_julian_day_test(void **state) {
 
     (void) state;
 }
+
+void calendar_date_test(void **state) {
+    double dates[16][4] = {
+        // Example 7.c
+        {2436116.31, 1957, 10,  4.81},
+        // Subsequent exercises
+        {1842713.0,   333,  1, 27.5},
+        {1507900.13, -584,  5, 28.63},
+        // Data from table in Chapter 7
+        {2451545.0,  2000,  1,  1.5},
+        {2446822.5,  1987,  1, 27.0},
+        {2446966.0,  1987,  6, 19.5},
+        {2447187.5,  1988,  1, 27.0},
+        {2447332.0,  1988,  6, 19.5},
+        {2415020.5,  1900,  1,  1.0},
+        {2305447.5,  1600,  1,  1.0},
+        {2305812.5,  1600, 12, 31.0},
+        {2026871.8,   837,  4, 10.3},
+        {1356001.0, -1000,  7, 12.5},
+        {1355866.5, -1000,  2, 29.0},
+        {1355671.4, -1001,  8, 17.9},
+        {      0.0, -4712,  1,  1.5}
+    };
+
+    for (intmax_t i = 0; i < 16; i++) {
+        date_t date = calendar_date(dates[i][0]);
+
+        assert_int_equal(date.year, dates[i][1]);
+        assert_int_equal(date.mon, dates[i][2]);
+        assert_double_equal(date.mday, dates[i][3], JULIAN_DAY_TOLERANCE);
+    }
+
+    (void) state;
+}

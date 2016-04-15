@@ -16,3 +16,4 @@ void julian_day_test(void **state);
 void julian_day_zero_test(void **state);
 void get_year_type_test(void **state);
 void modified_julian_day_test(void **state);
+void calendar_date_test(void **state);
