@@ -147,3 +147,15 @@ void calendar_date_test(void **state) {
 
     (void) state;
 }
+
+void calendar_diff_test(void **state) {
+  // Example 7.d
+  date_t date_1 = {.year = 1986, .mon = 2, .mday =  9};
+  date_t date_2 = {.year = 1910, .mon = 4, .mday = 20};
+
+  double days = calendar_diff(date_1, date_2);
+
+  assert_double_equal(days, 27689.0, JULIAN_DAY_TOLERANCE);
+
+  (void) state;
+}

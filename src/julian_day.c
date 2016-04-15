@@ -104,3 +104,7 @@ date_t calendar_date(double julian_day) {
 
     return date;
 }
+
+double calendar_diff(date_t date_1, date_t date_2) {
+  return julian_day(date_1) - julian_day(date_2);
+}
