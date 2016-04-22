@@ -185,3 +185,14 @@ void date_after_test(void **state) {
 
   (void) state;
 }
+
+void day_of_week_test(void **state) {
+  // Example 7.e
+  date_t date = {.year = 1954, .mon = 6, .mday = 30};
+
+  day_t day = day_of_week(date);
+
+  assert_int_equal(day, WEDNESDAY);
+
+  (void) state;
+}
