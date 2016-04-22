@@ -196,3 +196,44 @@ void day_of_week_test(void **state) {
 
   (void) state;
 }
+
+void day_of_year_test(void **state) {
+  intmax_t dates[2][4] = {
+    // Example 7.f
+    {1978, 11, 14, 318},
+    // Example 7.g
+    {1988,  4, 22, 113}
+  };
+
+  for (intmax_t i = 0; i < 2; i++) {
+    date_t date = {
+      .year = dates[i][0],
+      .mon  = dates[i][1],
+      .mday = dates[i][2]
+    };
+
+    intmax_t doy = day_of_year(date);
+    assert_int_equal(doy, dates[i][3]);
+  }
+
+  (void) state;
+}
+
+void date_from_doy_test(void **state) {
+  intmax_t dates[2][4] = {
+    // Example 7.f
+    {1978, 11, 14, 318},
+    // Example 7.g
+    {1988,  4, 22, 113}
+  };
+
+  for (intmax_t i = 0; i < 2; i++) {
+    date_t date = date_from_doy(dates[i][0], dates[i][3]);
+
+    assert_int_equal(date.year, dates[i][0]);
+    assert_int_equal(date.mon, dates[i][1]);
+    assert_double_equal(date.mday, dates[i][2], JULIAN_DAY_TOLERANCE);
+  }
+
+  (void) state;
+}

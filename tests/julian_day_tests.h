@@ -21,3 +21,5 @@ void calendar_diff_test(void **state);
 void date_before_test(void **state);
 void date_after_test(void **state);
 void day_of_week_test(void **state);
+void day_of_year_test(void **state);
+void date_from_doy_test(void **state);

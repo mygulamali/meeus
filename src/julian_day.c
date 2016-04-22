@@ -120,3 +120,37 @@ date_t date_after(date_t date, double days) {
 day_t day_of_week(date_t date) {
   return (day_t) floor(julian_day(date) + 1.5) % 7;
 }
+
+intmax_t day_of_year(date_t date) {
+  intmax_t k = 2;
+
+  if (get_year_type(date.year) == BISSEXTILE_YEAR) k = 1;
+
+  return (
+    (intmax_t) (275 * date.mon / 9)
+    - k * (intmax_t) ((date.mon + 9) / 12)
+    + (intmax_t) date.mday
+    - 30
+  );
+}
+
+date_t date_from_doy(intmax_t year, intmax_t doy) {
+  intmax_t k = 2;
+  date_t date = {.year = year};
+
+  if (get_year_type(year) == BISSEXTILE_YEAR) k = 1;
+
+  if (doy < 32)
+    date.mon = 1;
+  else
+    date.mon = (intmax_t) (9.0 * (k + doy) / 275.0 + 0.98);
+
+  date.mday = (double) (
+    doy
+    - (intmax_t) (275 * date.mon / 9)
+    + k * (intmax_t) ((date.mon + 9) / 12)
+    + 30
+  );
+
+  return date;
+}

@@ -41,3 +41,5 @@ double calendar_diff(date_t date_1, date_t date_2);
 date_t date_before(date_t date, double days);
 date_t date_after(date_t date, double days);
 day_t day_of_week(date_t date);
+intmax_t day_of_year(date_t date);
+date_t date_from_doy(intmax_t year, intmax_t doy);

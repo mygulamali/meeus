@@ -17,7 +17,9 @@ int main(void) {
         cmocka_unit_test(calendar_diff_test),
         cmocka_unit_test(date_before_test),
         cmocka_unit_test(date_after_test),
-        cmocka_unit_test(day_of_week_test)
+        cmocka_unit_test(day_of_week_test),
+        cmocka_unit_test(day_of_year_test),
+        cmocka_unit_test(date_from_doy_test)
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
